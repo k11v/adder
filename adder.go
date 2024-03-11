@@ -9,7 +9,7 @@ import (
 func add(w http.ResponseWriter, req *http.Request) {
 	if req.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
-    fmt.Fprintf(w, "{\"status\": \"error\", \"message\": \"Method not allowed\"}\n")
+		fmt.Fprintf(w, "{\"status\": \"error\", \"message\": \"Method not allowed\"}\n")
 		return
 	}
 
@@ -36,20 +36,19 @@ func add(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "{\"sum\": %d}\n", sum)
 }
 
-
 func health(w http.ResponseWriter, req *http.Request) {
-    if req.Method != http.MethodGet {
-        w.WriteHeader(http.StatusMethodNotAllowed)
-        fmt.Fprintf(w, "{\"status\": \"error\", \"message\": \"Method not allowed\"}\n")
-        return
-    }
+	if req.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		fmt.Fprintf(w, "{\"status\": \"error\", \"message\": \"Method not allowed\"}\n")
+		return
+	}
 
-    fmt.Fprintf(w, "{\"status\": \"ok\"}\n")
+	fmt.Fprintf(w, "{\"status\": \"ok\"}\n")
 }
 
 func main() {
-    http.HandleFunc("/add", add)
-    http.HandleFunc("/health", health)
+	http.HandleFunc("/add", add)
+	http.HandleFunc("/health", health)
 
-    http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":8000", nil)
 }
